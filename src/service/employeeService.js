@@ -17,7 +17,7 @@ const update = data =>{
     return httpCommon.put('/employees',data);
 }
 
-const remove = id =>{
+const remove = id => {
     return httpCommon.delete(`/employees/${id}`);
 }
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link, unstable_HistoryRouter, useNavigate, useParams } from 'react-router-dom';
 import employeeService from '../service/employeeService';
 
@@ -39,10 +39,24 @@ export const AddEmployee = () => {
 
     }
 
+    useEffect(()=>{
+        if(id)
+        {
+            employeeService.get(id).then(employee=>{
+                setFirstName(employee.data.firstName);
+                setLastName(employee.data.lastName);
+                setMobile(employee.data.mobile);
+            }).catch(Error=>{
+                console.log("something went wrong",Error);
+            });
+        }
+    },[])
+
   return (
     <div className='container'>
     <h1>Add Employee</h1>
     <hr />
+    
     <form>
     <div className='form-group'>
     <input type="text" className='form-control col-4' id='firstname' value={firstName} 
