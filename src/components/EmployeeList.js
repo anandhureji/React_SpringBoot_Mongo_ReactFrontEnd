@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
 import employeeService from '../service/employeeService';
 
 
@@ -18,7 +19,9 @@ export default function EmployeeList() {
    
      return (
        <div className='container'>
+       
        <h1>List of employees</h1>
+       <Link to="/add" className='btn btn-primary mb-2'>Add employee</Link>
        <div>
        <table className='table table-bordered table-striped'>
        <thead className='thead-dark'>
