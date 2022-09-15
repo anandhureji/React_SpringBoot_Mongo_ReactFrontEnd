@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { unstable_HistoryRouter, useNavigate } from 'react-router-dom';
+import { Link, unstable_HistoryRouter, useNavigate, useParams } from 'react-router-dom';
 import employeeService from '../service/employeeService';
 
 export const AddEmployee = () => {
@@ -8,19 +8,34 @@ export const AddEmployee = () => {
     const [lastName,setLastName] = useState('');
     const [mobile,setMobile] = useState('');
     const navigate=useNavigate();
+    const {id} = useParams();
 
 
     const saveEmployee = (e) =>{
         e.preventDefault();
 
-        const employee = {firstName,lastName,mobile};
-        employeeService.create(employee).then(Response=>{
-            console.log("Employee added successfully",Response.data);
-            navigate('/');
+        const employee = {firstName,lastName,mobile,id};
+        if(id)
+        {
+            employeeService.update(employee).then(Response=>{
+                console.log("Employee update successfully",Response.data);
+                navigate('/');
+            }).catch(Error=>{
+                console.log("Spmethin went wrong",Error);
+            });
+
+        }
+        else
+        {
+            employeeService.create(employee).then(Response=>{
+                console.log("Employee added successfully",Response.data);
+                navigate('/');
+            
+            }).catch(Error=>{
+                console.log("some thing went wrong",Error);
+            });
+        }
         
-        }).catch(Error=>{
-            console.log("some thing went wrong",Error);
-        })
 
     }
 
@@ -49,6 +64,8 @@ export const AddEmployee = () => {
     <button className='btn btn-primary' onClick={(e)=>saveEmployee(e)}>Save</button>
     </div>
     </form>
+    <hr />
+    <Link to="/" className='btn btn-primary mb-2'>Home</Link>
     </div>
   )
 }

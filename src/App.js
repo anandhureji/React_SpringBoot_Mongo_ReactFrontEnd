@@ -14,6 +14,7 @@ function App(){
 
     <Route path='/add' element={<AddEmployee />} />
     <Route path='*' element={<NotFound />} />
+    <Route path='/employee/edit/:id' element={<AddEmployee /> } />
     </Routes>
     </div>
 

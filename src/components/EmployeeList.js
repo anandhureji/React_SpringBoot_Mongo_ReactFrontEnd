@@ -30,6 +30,7 @@ export default function EmployeeList() {
        <th>FirstName</th>
        <th>LastName</th>
        <th>Phone</th>
+       <th>Actions</th>
        </tr>
        </thead>
        <tbody>
@@ -39,6 +40,9 @@ export default function EmployeeList() {
            <td>{employee.firstName}</td>
            <td>{employee.lastName}</td>
            <td>{employee.mobile}</td>
+           <td>
+           <Link to={`/employee/edit/${employee.id}`} className="btn btn-success">update</Link>
+           </td>
            </tr>
          ))
    
